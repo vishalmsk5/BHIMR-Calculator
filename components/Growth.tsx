@@ -6,21 +6,16 @@ import {
 import { Stack, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useThemeStore } from '../store/useThemeStore';
+import { useLanguageStore } from '../store/useLanguageStore';
+import { t, toLocalNumber } from '../constants/translations';
 import * as Clipboard from 'expo-clipboard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const COLOR = '#2E7D32';
 
-const MODES = [
-  { id: 'wastage', label: '% Wastage', icon: '🏭', desc: 'Material loss calculation' },
-  { id: 'profit', label: 'Profit/Loss %', icon: '💰', desc: 'Buy/sell margin' },
-  { id: 'compound', label: 'Compound Growth', icon: '📈', desc: 'CAGR & compounding' },
-  { id: 'markup', label: 'Markup/Margin', icon: '🏷️', desc: 'Retail pricing' },
-  { id: 'breakeven', label: 'Break Even', icon: '⚖️', desc: 'Fixed + variable costs' },
-];
-
 export default function GrowthWastageScreen() {
   const { theme } = useThemeStore();
+  const { language } = useLanguageStore();
   const router = useRouter();
   const [modeIdx, setModeIdx] = useState(0);
   const [a, setA] = useState('');
@@ -28,37 +23,45 @@ export default function GrowthWastageScreen() {
   const [c, setC] = useState('');
   const [result, setResult] = useState<{ lines: string[]; main: string } | null>(null);
 
-  const fmt = (n: number) => parseFloat(n.toPrecision(8)).toString();
+  const fmt = (n: number) => toLocalNumber(parseFloat(n.toPrecision(8)).toString(), language);
+
+  const MODES = [
+    { id: 'wastage', label: t('wastageCalc', language) || '% Wastage', icon: '🏭', desc: t('wastageDesc', language) || 'Material loss calculation' },
+    { id: 'profit', label: t('profitLossCalc', language), icon: '💰', desc: t('profitDesc', language) || 'Buy/sell margin' },
+    { id: 'compound', label: t('compoundGrowth', language) || 'Compound Growth', icon: '📈', desc: t('compoundDesc', language) || 'CAGR & compounding' },
+    { id: 'markup', label: t('markupMargin', language) || 'Markup/Margin', icon: '🏷️', desc: t('markupDesc', language) || 'Retail pricing' },
+    { id: 'breakeven', label: t('breakEven', language) || 'Break Even', icon: '⚖️', desc: t('breakevenDesc', language) || 'Fixed + variable costs' },
+  ];
 
   const calculate = () => {
     const A = parseFloat(a), B = parseFloat(b), C = parseFloat(c);
     const mode = MODES[modeIdx].id;
 
     if (mode === 'wastage') {
-      if (isNaN(A) || isNaN(B)) { setResult({ lines: ['Enter Base & Wastage %'], main: '' }); return; }
+      if (isNaN(A) || isNaN(B)) { setResult({ lines: [t('enterBaseWastage', language) || 'Enter Base & Wastage %'], main: '' }); return; }
       const waste = (A * B) / 100;
       const net = A + waste;
-      setResult({ lines: [`Base: ${A}`, `Wastage ${B}%: ${fmt(waste)}`, `Total required: ${fmt(net)}`], main: fmt(net) });
+      setResult({ lines: [`${t('amount', language)}: ${fmt(A)}`, `${t('wastage', language) || 'Wastage'} ${fmt(B)}%: ${fmt(waste)}`, `${t('totalRequired', language) || 'Total required'}: ${fmt(net)}`], main: fmt(net) });
     } else if (mode === 'profit') {
-      if (isNaN(A) || isNaN(B)) { setResult({ lines: ['Enter Cost & Sell Price'], main: '' }); return; }
+      if (isNaN(A) || isNaN(B)) { setResult({ lines: [t('enterCostSell', language) || 'Enter Cost & Sell Price'], main: '' }); return; }
       const diff = B - A, pct = (diff / A) * 100;
-      const label = diff >= 0 ? 'Profit' : 'Loss';
-      setResult({ lines: [`Cost: ${A}`, `Sell: ${B}`, `${label}: ${fmt(Math.abs(diff))}`, `${label} %: ${fmt(Math.abs(pct))}%`], main: fmt(Math.abs(pct)) + '%' });
+      const label = diff >= 0 ? t('profit', language) : t('loss', language);
+      setResult({ lines: [`${t('costPrice', language)}: ${fmt(A)}`, `${t('sellingPrice', language)}: ${fmt(B)}`, `${label}: ${fmt(Math.abs(diff))}`, `${label} %: ${fmt(Math.abs(pct))}%`], main: fmt(Math.abs(pct)) + '%' });
     } else if (mode === 'compound') {
-      if (isNaN(A) || isNaN(B) || isNaN(C)) { setResult({ lines: ['Enter Principal, Rate %, Years'], main: '' }); return; }
+      if (isNaN(A) || isNaN(B) || isNaN(C)) { setResult({ lines: [t('enterPrincipalRateYears', language) || 'Enter Principal, Rate %, Years'], main: '' }); return; }
       const final = A * Math.pow(1 + B / 100, C);
       const interest = final - A;
-      setResult({ lines: [`Principal: ${A}`, `Rate: ${B}%`, `Years: ${C}`, `Final: ${fmt(final)}`, `Interest earned: ${fmt(interest)}`], main: fmt(final) });
+      setResult({ lines: [`${t('loanAmount', language)}: ${fmt(A)}`, `${t('interestRate', language)}: ${fmt(B)}%`, `${t('years', language)}: ${fmt(C)}`, `${t('finalAmount', language) || 'Final'}: ${fmt(final)}`, `${t('totalInterest', language)}: ${fmt(interest)}`], main: fmt(final) });
     } else if (mode === 'markup') {
-      if (isNaN(A) || isNaN(B)) { setResult({ lines: ['Enter Cost & Markup %'], main: '' }); return; }
+      if (isNaN(A) || isNaN(B)) { setResult({ lines: [t('enterCostMarkup', language) || 'Enter Cost & Markup %'], main: '' }); return; }
       const sell = A * (1 + B / 100);
       const margin = ((sell - A) / sell) * 100;
-      setResult({ lines: [`Cost: ${A}`, `Markup: ${B}%`, `Sell Price: ${fmt(sell)}`, `Gross Margin: ${fmt(margin)}%`], main: fmt(sell) });
+      setResult({ lines: [`${t('costPrice', language)}: ${fmt(A)}`, `${t('markup', language) || 'Markup'}: ${fmt(B)}%`, `${t('sellingPrice', language)}: ${fmt(sell)}`, `${t('margin', language)}: ${fmt(margin)}%`], main: fmt(sell) });
     } else if (mode === 'breakeven') {
-      if (isNaN(A) || isNaN(B) || isNaN(C)) { setResult({ lines: ['Enter Fixed Costs, Price, Variable Cost'], main: '' }); return; }
+      if (isNaN(A) || isNaN(B) || isNaN(C)) { setResult({ lines: [t('enterFixedCosts', language) || 'Enter Fixed Costs, Price, Variable Cost'], main: '' }); return; }
       const units = A / (B - C);
       const revenue = units * B;
-      setResult({ lines: [`Fixed Costs: ${A}`, `Price per unit: ${B}`, `Variable cost/unit: ${C}`, `Break-even units: ${fmt(units)}`, `Break-even revenue: ${fmt(revenue)}`], main: fmt(units) });
+      setResult({ lines: [`${t('fixedCosts', language) || 'Fixed Costs'}: ${fmt(A)}`, `${t('pricePerUnit', language) || 'Price/unit'}: ${fmt(B)}`, `${t('variableCost', language) || 'Variable cost/unit'}: ${fmt(C)}`, `${t('breakEvenUnits', language) || 'Break-even units'}: ${fmt(units)}`, `${t('breakEvenRevenue', language) || 'Break-even revenue'}: ${fmt(revenue)}`], main: fmt(units) });
     }
   };
 
@@ -70,21 +73,25 @@ export default function GrowthWastageScreen() {
       const notes = stored ? JSON.parse(stored) : [];
       notes.unshift({ id: Date.now().toString(), text, timestamp: Date.now() });
       await AsyncStorage.setItem('@bhim_calculation_notes', JSON.stringify(notes.slice(0, 100)));
-      alert('Saved to Notes!');
+      alert(t('savedToNotes', language) || 'Saved to Notes!');
     } catch {}
   };
 
   const mode = MODES[modeIdx];
-  const labels = modeIdx === 0 ? ['Base Amount', 'Wastage %', '']
-    : modeIdx === 1 ? ['Cost Price', 'Sell Price', '']
-    : modeIdx === 2 ? ['Principal (₹)', 'Rate (%)', 'Years']
-    : modeIdx === 3 ? ['Cost Price', 'Markup %', '']
-    : ['Fixed Costs', 'Price/Unit', 'Variable Cost/Unit'];
+  const labels = modeIdx === 0
+    ? [t('amount', language), t('wastagePercent', language) || 'Wastage %', '']
+    : modeIdx === 1
+    ? [t('costPrice', language), t('sellingPrice', language), '']
+    : modeIdx === 2
+    ? [t('loanAmount', language), t('interestRate', language), t('years', language)]
+    : modeIdx === 3
+    ? [t('costPrice', language), t('markupPercent', language) || 'Markup %', '']
+    : [t('fixedCosts', language) || 'Fixed Costs', t('pricePerUnit', language) || 'Price/Unit', t('variableCost', language) || 'Variable Cost/Unit'];
 
   return (
     <>
       <Stack.Screen options={{
-        title: '% Growth & Wastage',
+        title: t('growthWastage', language) || '% Growth & Wastage',
         headerStyle: { backgroundColor: COLOR },
         headerTintColor: '#FFF',
         headerLeft: () => (
@@ -98,7 +105,7 @@ export default function GrowthWastageScreen() {
 
           <View style={[styles.infoCard, { backgroundColor: '#E8F5E9' }]}>
             <Text style={styles.infoText}>
-              💡 <Text style={{ fontWeight: '700' }}>Industry Use:</Text> Manufacturing managers computing raw material wastage budgets, or IT startups evaluating quarterly compound revenue growth.
+              💡 <Text style={{ fontWeight: '700' }}>{t('industryUse', language) || 'Industry Use:'}</Text> {t('growthIndustryUse', language) || 'Manufacturing managers computing raw material wastage budgets, or IT startups evaluating quarterly compound revenue growth.'}
             </Text>
           </View>
 
@@ -123,7 +130,6 @@ export default function GrowthWastageScreen() {
 
           <Text style={[styles.modeDesc, { color: theme.textSecondary }]}>{mode.desc}</Text>
 
-          {/* Inputs */}
           {labels[0] ? (
             <TextInput
               style={[styles.input, { backgroundColor: theme.surface, color: theme.text, borderColor: theme.border }]}
@@ -150,7 +156,7 @@ export default function GrowthWastageScreen() {
           ) : null}
 
           <TouchableOpacity style={[styles.runBtn, { backgroundColor: COLOR }]} onPress={calculate}>
-            <Text style={styles.runBtnText}>▶ RUN DYNAMIC COMPUTATION</Text>
+            <Text style={styles.runBtnText}>▶ {t('runComputation', language) || 'RUN DYNAMIC COMPUTATION'}</Text>
           </TouchableOpacity>
 
           {result && (
@@ -165,11 +171,11 @@ export default function GrowthWastageScreen() {
               <View style={styles.resultActions}>
                 <TouchableOpacity style={styles.actionBtn} onPress={() => result.main && Clipboard.setString(result.main)}>
                   <Ionicons name="copy-outline" size={16} color="#FFF" />
-                  <Text style={styles.actionBtnText}>COPY</Text>
+                  <Text style={styles.actionBtnText}>{t('copy', language) || 'COPY'}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.actionBtn} onPress={saveToNotes}>
                   <Ionicons name="save-outline" size={16} color="#FFF" />
-                  <Text style={styles.actionBtnText}>SAVE TO NOTES</Text>
+                  <Text style={styles.actionBtnText}>{t('saveToNotes', language) || 'SAVE TO NOTES'}</Text>
                 </TouchableOpacity>
               </View>
             </View>

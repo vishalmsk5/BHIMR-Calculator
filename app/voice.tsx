@@ -391,7 +391,7 @@ export default function VoicePage() {
   const [showHistory, setShowHistory] = useState(false);
   const [inputText, setInputText] = useState('');
   const [webviewReady, setWebviewReady] = useState(false);
-  const [selectedLang, setSelectedLang] = useState<'en-IN' | 'mr-IN' | 'hi-IN'>('en-IN');
+  const [selectedLang, setSelectedLang] = useState<'en-IN'>('en-IN');
   const [waitMsg, setWaitMsg] = useState('');
 
   const webviewRef = useRef<WebView>(null);
@@ -523,10 +523,8 @@ export default function VoicePage() {
   const fmtTime = (ts: number) => { const d = new Date(ts); return `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`; };
 
   const langs = [
-    { code: 'en-IN' as const, label: 'English', flag: '🇮🇳' },
-    { code: 'mr-IN' as const, label: 'मराठी', flag: '🧡' },
-    { code: 'hi-IN' as const, label: 'हिंदी', flag: '💙' },
-  ];
+  { code: 'en-IN' as const, label: 'English', flag: '🇮🇳' },
+];
 
   const examples = [
     { t: 'one plus two', l: '🔢 one plus two = 3' },

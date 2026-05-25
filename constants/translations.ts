@@ -32,7 +32,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── ENGLISH ──
   en: {
-    appName: 'Bhim Universal Calculator',
+    appName: 'BHIMR Universal Calculator',
     appSubtitle: '✨ Inspired by Dr. B.R. Ambedkar',
     basic: 'Basic',
     scientific: 'Scientific',
@@ -70,7 +70,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── ENGLISH INDIA (same as en) ──
   'en-IN': {
-    appName: 'Bhim Universal Calculator',
+    appName: 'BHIMR Universal Calculator',
     appSubtitle: '✨ Inspired by Dr. B.R. Ambedkar',
     basic: 'Basic', scientific: 'Scientific',
     aiVoice: 'AI Voice', businessTools: 'Business Tools',

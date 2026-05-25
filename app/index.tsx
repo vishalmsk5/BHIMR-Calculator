@@ -182,7 +182,7 @@ export default function Index() {
                 style={[styles.quickAccessCard, { backgroundColor: theme.surface }]}
                 onPress={() => router.push('/business')}
               >
-                <Ionicons name="briefcase" size={32} color={theme.accent} />
+                <Ionicons name="briefcase" size={32} color={theme.primary} />
                 <Text style={[styles.quickAccessText, { color: theme.text }]}>
                   {t('businessTools', language)}
                 </Text>

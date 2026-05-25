@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Bhim Universal Calculator",
+    "name": "BHIMR Universal Calculator",
     "slug": "bhim-calculator",
-    "version": "1.0.8",
+    "version": "9.0.0",
     "sdkVersion": "54.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -20,7 +20,7 @@
     },
     "android": {
   "package": "com.bhimcalculator.app",
-  "versionCode": 8,
+  "versionCode": 9,
 
   "permissions": [
     "INTERNET",

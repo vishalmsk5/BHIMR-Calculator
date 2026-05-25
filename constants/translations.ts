@@ -1,5 +1,5 @@
 // ===================================================================
-// BHIM UNIVERSAL CALCULATOR - COMPLETE TRANSLATIONS
+// BHIMR UNIVERSAL CALCULATOR - COMPLETE TRANSLATIONS
 // All 17 languages - UI text + number systems + Business Tools
 // ===================================================================
 
@@ -107,7 +107,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── HINDI ──
   hi: {
-    appName: 'भीम यूनिवर्सल कैलकुलेटर',
+    appName: 'BHIMR यूनिवर्सल कैलकुलेटर',
     appSubtitle: '✨ डॉ. बी.आर. अंबेडकर से प्रेरित',
     basic: 'सामान्य', scientific: 'वैज्ञानिक',
     aiVoice: 'AI आवाज़', businessTools: 'व्यापार उपकरण',
@@ -144,7 +144,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── MARATHI ──
   mr: {
-    appName: 'भीम युनिव्हर्सल कॅल्क्युलेटर',
+    appName: 'BHIMR युनिव्हर्सल कॅल्क्युलेटर',
     appSubtitle: '✨ डॉ. बी.आर. आंबेडकर यांनी प्रेरित',
     basic: 'सामान्य', scientific: 'वैज्ञानिक',
     aiVoice: 'AI आवाज', businessTools: 'व्यवसाय साधने',
@@ -181,7 +181,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── TAMIL ──
   ta: {
-    appName: 'பீம் யுனிவர்சல் கால்குலேட்டர்',
+    appName: 'BHIMR யுனிவர்சல் கால்குலேட்டர்',
     appSubtitle: '✨ டாக்டர் பி.ஆர். அம்பேத்கர் தூண்டுதல்',
     basic: 'அடிப்படை', scientific: 'அறிவியல்',
     aiVoice: 'AI குரல்', businessTools: 'வணிக கருவிகள்',
@@ -218,12 +218,12 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── TELUGU ──
   te: {
-    appName: 'భీమ్ యూనివర్సల్ కాల్కులేటర్',
+    appName: 'BHIMR యూనివర్సల్ కాల్కులేటర్',
     appSubtitle: '✨ డా. బి.ఆర్. అంబేద్కర్ స్ఫూర్తి',
     basic: 'ప్రాథమిక', scientific: 'శాస్త్రీయ',
     aiVoice: 'AI వాయిస్', businessTools: 'వ్యాపార సాధనాలు',
     explore: 'అన్వేషించు', settings: 'సెట్టింగులు',
-    displayLanguage: 'భాష ఎంచుకోండి', chooseTheme: 'థీమ్ ఎంచుకోండి',
+    displayLanguage: ' భாஷ எண்ணிக்கை', chooseTheme: ' தேர்வு',
     quickSettings: 'త్వరిత సెట్టింగులు', quickAccess: 'త్వరిత యాక్సెస్',
     deepBlue: 'లోతైన నీలం', constitutionGold: 'రాజ్యాంగ బంగారం',
     nightMode: 'నైట్ మోడ్', gradientGlow: 'గ్రేడియెంట్ గ్లో',
@@ -255,7 +255,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── GUJARATI ──
   gu: {
-    appName: 'ભીમ યુનિવર્સલ કેલ્ક્યુલેટર',
+    appName: 'BHIMR યુનિવર્સલ કેલ્ક્યુલેટર',
     appSubtitle: '✨ ડૉ. બી.આર. આંબેડકરથી પ્રેરિત',
     basic: 'સાધારણ', scientific: 'વૈજ્ઞાનિક',
     aiVoice: 'AI અવાજ', businessTools: 'વ્યવસાય સાધનો',
@@ -292,7 +292,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── MALAYALAM ──
   ml: {
-    appName: 'ഭീം യൂണിവേഴ്സൽ കാൽക്കുലേറ്റർ',
+    appName: 'BHIMR യൂണിവേഴ്സൽ കാൽക്കുലേറ്റർ',
     appSubtitle: '✨ ഡോ. ബി.ആർ. അംബേദ്കർ പ്രചോദനം',
     basic: 'അടിസ്ഥാനം', scientific: 'ശാസ്ത്രീയം',
     aiVoice: 'AI ശബ്ദം', businessTools: 'ബിസിനസ് ടൂളുകൾ',
@@ -329,7 +329,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── BENGALI ──
   bn: {
-    appName: 'ভীম ইউনিভার্সাল ক্যালকুলেটর',
+    appName: 'BHIMR ইউনিভার্সাল ক্যালকুলেটর',
     appSubtitle: '✨ ডা. বি.আর. আম্বেদকর অনুপ্রাণিত',
     basic: 'সাধারণ', scientific: 'বৈজ্ঞানিক',
     aiVoice: 'AI ভয়েস', businessTools: 'ব্যবসায়িক সরঞ্জাম',
@@ -366,7 +366,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── KANNADA ──
   kn: {
-    appName: 'ಭೀಮ್ ಯೂನಿವರ್ಸಲ್ ಕ್ಯಾಲ್ಕುಲೇಟರ್',
+    appName: 'BHIMR ಯೂನಿವರ್ಸಲ್ ಕ್ಯಾಲ್ಕುಲೇಟರ್',
     appSubtitle: '✨ ಡಾ. ಬಿ.ಆರ್. ಅಂಬೇಡ್ಕರ್ ಪ್ರೇರಣೆ',
     basic: 'ಮೂಲಭೂತ', scientific: 'ವೈಜ್ಞಾನಿಕ',
     aiVoice: 'AI ಧ್ವನಿ', businessTools: 'ವ್ಯಾಪಾರ ಸಾಧನಗಳು',
@@ -403,22 +403,22 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── PUNJABI ──
   pa: {
-    appName: 'ਭੀਮ ਯੂਨੀਵਰਸਲ ਕੈਲਕੂਲੇਟਰ',
+    appName: 'BHIMR ਯੂਨੀਵਰਸਲ ਕੈਲਕੂਲੇਟਰ',
     appSubtitle: '✨ ਡਾ. ਬੀ.ਆਰ. ਅੰਬੇਡਕਰ ਤੋਂ ਪ੍ਰੇਰਿਤ',
     basic: 'ਮੁੱਢਲਾ', scientific: 'ਵਿਗਿਆਨਕ',
-    aiVoice: 'AI ਆਵਾਜ਼', businessTools: 'ਵਪਾਰਕ ਸੰਦ',
+    aiVoice: 'AI ਆਵਾਜ़', businessTools: 'ਵਪਾਰਕ ਸੰਦ',
     explore: 'ਖੋਜੋ', settings: 'ਸੈਟਿੰਗਾਂ',
-    displayLanguage: 'ਭਾਸ਼ਾ ਚੁਣੋ', chooseTheme: 'ਥੀਮ ਚੁਣੋ',
+    displayLanguage: 'ಭಾಷಾ ಆಯ್ಕೆಮಾಡಿ', chooseTheme: 'ಥೀಮ್ ಆಯ್ಕೆಮಾಡಿ',
     quickSettings: 'ਤੇਜ਼ ਸੈਟਿੰਗਾਂ', quickAccess: 'ਤੇਜ਼ ਪਹੁੰਚ',
     deepBlue: 'ਗਹਿਰਾ ਨੀਲਾ', constitutionGold: 'ਸੰਵਿਧਾਨ ਸੋਨਾ',
-    nightMode: 'ਰਾਤ ਮੋਡ', gradientGlow: 'ਗ੍ਰੇਡੀਐਂਟ ਗਲੋ',
-    soundFeedback: 'ਆਵਾਜ਼ ਫੀਡਬੈਕ', hapticFeedback: 'ਛੋਹ ਫੀਡਬੈਕ',
-    welcomeGreeting: 'ਸੁਆਗਤ ਸੁਨੇਹਾ',
-    history: 'ਇਤਿਹਾਸ', clearAll: 'ਸਭ ਮਿਟਾਓ', noHistory: 'ਕੋਈ ਇਤਿਹਾਸ ਨਹੀਂ',
-    startCalculating: 'ਗਣਨਾ ਸ਼ੁਰੂ ਕਰੋ!',
-    answer: 'ਜਵਾਬ:', tapToSpeak: 'ਬੋਲਣ ਲਈ ਟੈਪ ਕਰੋ',
-    listening: '🔴 ਸੁਣ ਰਿਹਾ ਹਾਂ... ਰੋਕਣ ਲਈ ਟੈਪ ਕਰੋ', typeInstead: 'ਟਾਈਪ ਕਰੋ',
-    calculate: 'ਗਣਨਾ ਕਰੋ', cancel: 'ਰੱਦ ਕਰੋ', error: 'ਗਲਤੀ',
+    nightMode: 'ਰಾತ್ರಿ ಮೋಡ್', gradientGlow: 'ಗ್ರೇಡಿಯಂಟ್ ಗ್ಲೋ',
+    soundFeedback: 'ಆವಾಜ್ ಫೀಡ್‌ಬ್ಯಾಕ್', hapticFeedback: 'ಸ್ಪರ್ಶ ಫೀಡ್‌ಬ್ಯಾಕ್',
+    welcomeGreeting: 'ಸುವಲಸನ ಸಂದೇಶ',
+    history: 'ಇತಿಹಾಸ', clearAll: 'ಲ್ಲ ತೆರವುಗೊಳಿಸಿ', noHistory: 'ಇತಿಹಾಸ ಇಲ്ല',
+    startCalculating: 'ಲೆಕ్క ಪ్రారంభించండి!',
+    answer: 'జవాబు:', tapToSpeak: ' 말డా టైపు చేయండి',
+    listening: '🔴 కేళ్ళు కలుగుతున్నది... నిలబడవడానికి టైపు చేయండి', typeInstead: 'లేక టైపు చేయడం',
+    calculate: 'లెక్క చేయడం', cancel: 'రద్దు చేయడం', error: 'దోषம்',
     clear: 'ਸਾਫ਼', tryThese: 'ਇਹ ਅਜ਼ਮਾਓ:',
     educateAgitateOrganize: '"ਸਿੱਖਿਅਤ, ਅੰਦੋਲਨ, ਸੰਗਠਿਤ"',
     freeForeever: 'ਹਮੇਸ਼ਾ ਮੁਫ਼ਤ • ❤️ ਸਭ ਲਈ',
@@ -440,7 +440,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── ARABIC ──
   ar: {
-    appName: 'حاسبة بهيم العالمية',
+    appName: 'BHIMR حاسبة العالمية',
     appSubtitle: '✨ مستوحاة من د. ب.ر. أمبيدكر',
     basic: 'أساسي', scientific: 'علمي',
     aiVoice: 'صوت AI', businessTools: 'أدوات الأعمال',
@@ -477,7 +477,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── FRENCH ──
   fr: {
-    appName: 'Bhim Calculatrice Universelle',
+    appName: 'BHIMR Calculatrice Universelle',
     appSubtitle: '✨ Inspiré par Dr. B.R. Ambedkar',
     basic: 'Basique', scientific: 'Scientifique',
     aiVoice: 'Voix IA', businessTools: 'Outils Métier',
@@ -514,7 +514,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── GERMAN ──
   de: {
-    appName: 'Bhim Universal Rechner',
+    appName: 'BHIMR Universal Rechner',
     appSubtitle: '✨ Inspiriert von Dr. B.R. Ambedkar',
     basic: 'Einfach', scientific: 'Wissenschaftlich',
     aiVoice: 'KI-Stimme', businessTools: 'Business-Tools',
@@ -551,7 +551,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── SPANISH ──
   es: {
-    appName: 'Bhim Calculadora Universal',
+    appName: 'BHIMR Calculadora Universal',
     appSubtitle: '✨ Inspirada por Dr. B.R. Ambedkar',
     basic: 'Básica', scientific: 'Científica',
     aiVoice: 'Voz IA', businessTools: 'Herramientas',
@@ -588,7 +588,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── ITALIAN ──
   it: {
-    appName: 'Bhim Calcolatrice Universale',
+    appName: 'BHIMR Calcolatrice Universale',
     appSubtitle: '✨ Ispirata da Dr. B.R. Ambedkar',
     basic: 'Base', scientific: 'Scientifica',
     aiVoice: 'Voce IA', businessTools: 'Strumenti',
@@ -625,7 +625,7 @@ export const translations: Record<string, LanguageTranslations> = {
 
   // ── RUSSIAN ──
   ru: {
-    appName: 'Bhim Универсальный Калькулятор',
+    appName: 'BHIMR Универсальный Калькулятор',
     appSubtitle: '✨ Вдохновлён Dr. B.R. Ambedkar',
     basic: 'Простой', scientific: 'Научный',
     aiVoice: 'Голос ИИ', businessTools: 'Бизнес-инструменты',

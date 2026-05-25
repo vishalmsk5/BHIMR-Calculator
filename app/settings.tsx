@@ -62,8 +62,8 @@ export default function SettingsPage() {
     await toggleFn(!currentValue);
     
     // Show confirmation for certain settings
-    if (label === 'Jai Bhim Greeting' && !currentValue) {
-      Alert.alert('✅ Enabled', '🙏 Jai Bhim greeting will now show on app start!');
+    if (label === 'Jai Bhim Universal CalculatorGreeting' && !currentValue) {
+      Alert.alert('✅ Enabled', '🙏 Jai Bhim Universal Calculatorgreeting will now show on app start!');
     }
   };
 
@@ -78,10 +78,10 @@ export default function SettingsPage() {
       const result = await Share.share(
         {
           message: shareMessage,
-          title: 'Bhim Universal Calculator',
+          title: 'BHIMR Universal Calculator',
         },
         {
-          dialogTitle: 'Share Bhim Calculator',
+          dialogTitle: 'Share BHIMR Calculator',
         }
       );
       
@@ -95,7 +95,7 @@ export default function SettingsPage() {
           // Shared
           console.log('Message was shared successfully');
         }
-        Alert.alert('✅ Thank you!', 'Thanks for sharing Bhim Universal Calculator! 🙏');
+        Alert.alert('✅ Thank you!', 'Thanks for sharing BHIMR Universal Calculator! 🙏');
       } else if (result.action === Share.dismissedAction) {
         // Dismissed
         console.log('Share dialog was dismissed');
@@ -104,8 +104,8 @@ export default function SettingsPage() {
       console.error('Share error:', error);
       // Fallback alert with the message
       Alert.alert(
-        '📤 Share Bhim Calculator',
-        '🙏 Jai Bhim! Check out Bhim Universal Calculator - A world-class calculator app inspired by Dr. B.R. Ambedkar with 20+ smart tools, AI voice calculator, and multilingual support. Free Forever!\n\nCopy this message and share it with your friends!',
+        '📤 Share BHIMR Calculator',
+        '🙏 Jai Bhim! Check out BHIMR Universal Calculator - A world-class calculator app inspired by Dr. B.R. Ambedkar with 20+ smart tools, AI voice calculator, and multilingual support. Free Forever!\n\nCopy this message and share it with your friends!',
         [{ text: 'OK' }]
       );
     }
@@ -117,8 +117,8 @@ export default function SettingsPage() {
     }
 
     Alert.alert(
-      '⭐ Rate Bhim Calculator',
-      'Thank you for using Bhim Universal Calculator! Your feedback helps us improve and spread awareness about Dr. B.R. Ambedkar\'s mission.\n\nWould you like to rate us?',
+      '⭐ Rate BHIMR Calculator',
+      'Thank you for using BHIMR Universal Calculator! Your feedback helps us improve and spread awareness about Dr. B.R. Ambedkar\'s mission.\n\nWould you like to rate us?',
       [
         { text: 'Later', style: 'cancel' },
         {
@@ -227,7 +227,7 @@ export default function SettingsPage() {
               </View>
               <Switch
                 value={jaiBlimGreeting}
-                onValueChange={() => handleToggle(setJaiBlimGreeting, jaiBlimGreeting, 'Jai Bhim Greeting')}
+                onValueChange={() => handleToggle(setJaiBlimGreeting, jaiBlimGreeting, 'Jai BHIMR Greeting')}
                 trackColor={{ false: theme.border, true: theme.primary }}
               />
             </View>
@@ -342,7 +342,7 @@ export default function SettingsPage() {
 
               <ScrollView style={styles.modalBody}>
                 <Text style={[styles.modalTitle, { color: theme.primary }]}>
-                  Bhim Universal Calculator
+                  BHIMR Universal Calculator
                 </Text>
                 
                 <Text style={[styles.modalSubtitle, { color: theme.textSecondary }]}>
@@ -369,16 +369,18 @@ export default function SettingsPage() {
                     "Educate, Agitate, Organize" - Dr. B.R. Ambedkar{'\n\n'}
                     This app honors Dr. Ambedkar's vision of equality, education, and progress. We provide world-class calculation tools free forever to empower everyone.
                   </Text>
+                  <Text style={[styles.footerSubtext, { color: theme.textSecondary }]}>
+                   Developed by Vishal Manohar
+                 </Text>
                 </View>
 
                 <View style={styles.featureSection}>
                   <Text style={[styles.sectionHeader, { color: theme.text }]}>📱 App Info</Text>
                   <Text style={[styles.featureText, { color: theme.text }]}>
-                    <Text style={{ fontWeight: 'bold' }}>Version:</Text> 2.0.0{'\n'}
-                    <Text style={{ fontWeight: 'bold' }}>Status:</Text> Free Forever 🎉{'\n'}
-                    <Text style={{ fontWeight: 'bold' }}>Platform:</Text> Android, iOS, Web{'\n'}
-                    <Text style={{ fontWeight: 'bold' }}>Backend:</Text> FastAPI + MongoDB{'\n'}
-                    <Text style={{ fontWeight: 'bold' }}>AI:</Text> Powered by Emergent LLM
+                   <Text style={{ fontWeight: 'bold' }}>Version:</Text> 9.0.0{'\n'}
+<Text style={{ fontWeight: 'bold' }}>Status:</Text> Free Forever 🎉{'\n'}
+<Text style={{ fontWeight: 'bold' }}>Platform:</Text> Android & iOS{'\n'}
+<Text style={{ fontWeight: 'bold' }}>Developer:</Text> Vishal Manohar
                   </Text>
                 </View>
 

@@ -20,6 +20,7 @@ import { useLanguageStore } from '../store/useLanguageStore';
 import { useSettingsStore } from '../store/useSettingsStore';
 import { themes, ThemeName } from '../constants/themes';
 import { languages, LanguageCode } from '../constants/languages';
+import { t } from '../constants/translations';
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -63,7 +64,7 @@ export default function SettingsPage() {
     
     // Show confirmation for certain settings
     if (label === 'Jai Bhim Universal CalculatorGreeting' && !currentValue) {
-      Alert.alert('✅ Enabled', '🙏 Jai Bhim Universal Calculatorgreeting will now show on app start!');
+      Alert.alert(t('active', language), t('welcomeGreeting', language));
     }
   };
 
@@ -73,7 +74,7 @@ export default function SettingsPage() {
     }
 
     try {
-      const shareMessage = '🙏 Jai Bhim! Check out Bhim Universal Calculator - A world-class calculator app inspired by Dr. B.R. Ambedkar with 20+ smart tools, AI voice calculator, and multilingual support. Free Forever! Download now!';
+      const shareMessage = 'Welcome to BHIMR Universal Calculator! 20+ smart tools, AI voice in 17 languages. Free Forever! Download now!';
       
       const result = await Share.share(
         {
@@ -95,7 +96,7 @@ export default function SettingsPage() {
           // Shared
           console.log('Message was shared successfully');
         }
-        Alert.alert('✅ Thank you!', 'Thanks for sharing BHIMR Universal Calculator! 🙏');
+        Alert.alert(t('active', language), t('freeForeever', language));
       } else if (result.action === Share.dismissedAction) {
         // Dismissed
         console.log('Share dialog was dismissed');
@@ -104,9 +105,9 @@ export default function SettingsPage() {
       console.error('Share error:', error);
       // Fallback alert with the message
       Alert.alert(
-        '📤 Share BHIMR Calculator',
+        t('shareApp', language),
         '🙏 Jai Bhim! Check out BHIMR Universal Calculator - A world-class calculator app inspired by Dr. B.R. Ambedkar with 20+ smart tools, AI voice calculator, and multilingual support. Free Forever!\n\nCopy this message and share it with your friends!',
-        [{ text: 'OK' }]
+        [{ text: t('active', language) }]
       );
     }
   };
@@ -117,12 +118,12 @@ export default function SettingsPage() {
     }
 
     Alert.alert(
-      '⭐ Rate BHIMR Calculator',
+      t('rateUs', language),
       'Thank you for using BHIMR Universal Calculator! Your feedback helps us improve and spread awareness about Dr. B.R. Ambedkar\'s mission.\n\nWould you like to rate us?',
       [
-        { text: 'Later', style: 'cancel' },
+        { text: t('cancel', language), style: 'cancel' },
         {
-          text: '⭐ Rate Now',
+          text: t('rateNow', language),
           onPress: async () => {
             try {
               // Try to open Google Play Store app or web link
@@ -146,18 +147,18 @@ export default function SettingsPage() {
                 } else {
                   // Last fallback - show thank you message
                   Alert.alert(
-                    '🙏 Thank You!',
+                    t('thankYou', language),
                     'We appreciate your support!\n\nPlay Store link will be available once the app is published.\n\nJai Bhim! 🙏',
-                    [{ text: 'OK' }]
+                    [{ text: t('active', language) }]
                   );
                 }
               }
             } catch (error) {
               console.error('Rate Us error:', error);
               Alert.alert(
-                '🙏 Thank You!',
+                t('thankYou', language),
                 'We appreciate your support!\n\nPlay Store link will be available once the app is published.\n\nJai Bhim! 🙏',
-                [{ text: 'OK' }]
+                [{ text: t('active', language) }]
               );
             }
           },
@@ -170,7 +171,7 @@ export default function SettingsPage() {
     <>
       <Stack.Screen
         options={{
-          title: 'Settings',
+          title: t('settings', language),
           headerStyle: { backgroundColor: theme.primary },
           headerTintColor: '#FFFFFF',
           headerLeft: () => (
@@ -211,44 +212,7 @@ export default function SettingsPage() {
             </View>
           </View>
 
-          {/* Ambedkar Theme Settings */}
-          <View style={[styles.section, { backgroundColor: theme.surface }]}>
-            <Text style={[styles.sectionTitle, { color: theme.text }]}>Ambedkar Inspiration</Text>
-            
-            <View style={styles.settingRow}>
-              <View style={styles.settingInfo}>
-                <Ionicons name="hand-right" size={24} color="#FFC107" />
-                <View style={styles.settingTextContainer}>
-                  <Text style={[styles.settingLabel, { color: theme.text }]}>Jai Bhim Greeting</Text>
-                  <Text style={[styles.settingDescription, { color: theme.textSecondary }]}>
-                    Play greeting sound on app start
-                  </Text>
-                </View>
-              </View>
-              <Switch
-                value={jaiBlimGreeting}
-                onValueChange={() => handleToggle(setJaiBlimGreeting, jaiBlimGreeting, 'Jai BHIMR Greeting')}
-                trackColor={{ false: theme.border, true: theme.primary }}
-              />
-            </View>
-
-            <View style={styles.settingRow}>
-              <View style={styles.settingInfo}>
-                <Ionicons name="image" size={24} color="#FFC107" />
-                <View style={styles.settingTextContainer}>
-                  <Text style={[styles.settingLabel, { color: theme.text }]}>Babasaheb Watermark</Text>
-                  <Text style={[styles.settingDescription, { color: theme.textSecondary }]}>
-                    Show background image
-                  </Text>
-                </View>
-              </View>
-              <Switch
-                value={showAmbedkarWatermark}
-                onValueChange={() => handleToggle(setShowAmbedkarWatermark, showAmbedkarWatermark, 'Watermark')}
-                trackColor={{ false: theme.border, true: theme.primary }}
-              />
-            </View>
-          </View>
+          
 
           {/* Theme Selection */}
           <View style={[styles.section, { backgroundColor: theme.surface }]}>
@@ -288,14 +252,7 @@ export default function SettingsPage() {
               <Text style={[styles.settingLabel, { color: theme.text }]}>About App</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.aboutRow}
-              onPress={() => setShowAboutBasasaheb(true)}
-            >
-              <Ionicons name="book" size={24} color="#FFC107" />
-              <Text style={[styles.settingLabel, { color: theme.text }]}>About Babasaheb</Text>
-            </TouchableOpacity>
-
+            
             <TouchableOpacity
               style={styles.aboutRow}
               onPress={handleShareApp}
@@ -377,7 +334,7 @@ export default function SettingsPage() {
                 <View style={styles.featureSection}>
                   <Text style={[styles.sectionHeader, { color: theme.text }]}>📱 App Info</Text>
                   <Text style={[styles.featureText, { color: theme.text }]}>
-                   <Text style={{ fontWeight: 'bold' }}>Version:</Text> 9.0.0{'\n'}
+                   <Text style={{ fontWeight: 'bold' }}>Version:</Text> 11.0.0{'\n'}
 <Text style={{ fontWeight: 'bold' }}>Status:</Text> Free Forever 🎉{'\n'}
 <Text style={{ fontWeight: 'bold' }}>Platform:</Text> Android & iOS{'\n'}
 <Text style={{ fontWeight: 'bold' }}>Developer:</Text> Vishal Manohar

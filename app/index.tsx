@@ -73,7 +73,7 @@ export default function Index() {
 
   useEffect(() => {
     if (jaiBlimGreeting) {
-      Speech.speak('Welcome to Bhim Universal Calculator', {
+      Speech.speak('Welcome to AI Voice Calculator', {
         language: 'en-IN', pitch: 1.0, rate: 0.9,
       });
     }

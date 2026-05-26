@@ -13,7 +13,9 @@ import { evaluate, factorial, log, log10, sqrt, sin, cos, tan, asin, acos, atan,
 import { Ionicons } from '@expo/vector-icons';
 import { useThemeStore } from '../store/useThemeStore';
 import { useSettingsStore } from '../store/useSettingsStore';
+import { useLanguageStore } from '../store/useLanguageStore';
 import { useScientificHistoryStore } from '../store/useCalculatorStore';
+import { t, toLocalNumber, fromLocalNumber, usesLocalNumbers } from '../constants/translations';
 
 const { width } = Dimensions.get('window');
 const BTN_W = (width - 32) / 5;
@@ -26,6 +28,7 @@ interface Props {
 export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
   const { theme } = useThemeStore();
   const { hapticEnabled } = useSettingsStore();
+  const { language } = useLanguageStore();
   const { history, addHistory, loadHistory, clearHistory } = useScientificHistoryStore();
 
   const [expr, setExpr] = useState('');
@@ -40,9 +43,22 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
 
   useEffect(() => { loadHistory(); }, []);
 
+  const useLocal = usesLocalNumbers(language);
+
+  const localDigit = (d: string): string => {
+    if (!useLocal) return d;
+    if (/^\d$/.test(d)) return toLocalNumber(d, language);
+    return d;
+  };
+
+  const localDisplay = (val: string): string => {
+    if (!useLocal) return val;
+    return toLocalNumber(val, language);
+  };
+
   const fmt = (val: number): string => {
-    if (!isFinite(val)) return 'Math Error';
-    if (Number.isNaN(val)) return 'Math Error';
+    if (!isFinite(val)) return t('error', language);
+    if (Number.isNaN(val)) return t('error', language);
     if (Math.abs(val) > 1e10 || (Math.abs(val) < 1e-7 && val !== 0)) {
       return val.toExponential(6);
     }
@@ -117,7 +133,7 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
         addHistory(savedExpr, res);
         if (onResult) onResult(res);
       } catch {
-        setResult('Math Error');
+        setResult(t('error', language));
         setExpr(''); setDisplayExpr(''); setOpenBrackets(0);
         setResultShown(false);
       }
@@ -181,7 +197,7 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
           addHistory(cur + '!', res);
           if (onResult) onResult(res);
         }
-      } catch { setResult('Math Error'); }
+      } catch { setResult(t('error', language)); }
       setShiftOn(false); return;
     }
 
@@ -248,7 +264,7 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
 
   const formatTime = (ts: number) => {
     const d = new Date(ts);
-    return `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`;
+    return localDisplay(`${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`);
   };
 
   type BtnDef = { label: string; sub?: string };
@@ -283,19 +299,19 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
       { label: 'Ans' },
     ],
     [
-      { label: '7' }, { label: '8' }, { label: '9' },
+      { label: localDigit('7') }, { label: localDigit('8') }, { label: localDigit('9') },
       { label: 'DEL' }, { label: 'AC' },
     ],
     [
-      { label: '4' }, { label: '5' }, { label: '6' },
+      { label: localDigit('4') }, { label: localDigit('5') }, { label: localDigit('6') },
       { label: '×' }, { label: '÷' },
     ],
     [
-      { label: '1' }, { label: '2' }, { label: '3' },
+      { label: localDigit('1') }, { label: localDigit('2') }, { label: localDigit('3') },
       { label: '+' }, { label: '-' },
     ],
     [
-      { label: '0' }, { label: '.' },
+      { label: localDigit('0') }, { label: '.' },
       { label: 'x³' },
       { label: 'M-' },
       { label: '=' },
@@ -303,6 +319,17 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
   ];
 
   const rows = getRows();
+
+  const handleButtonPress = (label: string) => {
+    if (useLocal) {
+      const arabicLabel = fromLocalNumber(label, language);
+      if (/^\d$/.test(arabicLabel)) {
+        press(arabicLabel);
+        return;
+      }
+    }
+    press(label);
+  };
 
   // ── FIXED COLORS - All use theme colors, no hardcoded yellow/red/blue ──
   const getBtnColor = (label: string): { bg: string; fg: string } => {
@@ -344,7 +371,7 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
     return { bg: theme.surface, fg: theme.text };
   };
 
-  const displayText = resultShown ? result : (displayExpr || '0');
+  const displayText = localDisplay(resultShown ? result : (displayExpr || '0'));
   const showSmallExpr = resultShown && displayExpr;
 
   return (
@@ -354,25 +381,25 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
       <View style={[styles.display, { backgroundColor: theme.surface }]}>
         <View style={styles.displayTopRow}>
           <Text style={[styles.modeText, { color: theme.textSecondary }]}>
-            {angleMode}  {memory !== 0 ? `M:${fmt(memory)}` : ''}
+            {angleMode}  {memory !== 0 ? `M:${localDisplay(fmt(memory))}` : ''}
           </Text>
           <TouchableOpacity onPress={() => setShowHistory(true)} style={styles.histBtn}>
             <Ionicons name="time-outline" size={16} color={theme.primary} />
-            <Text style={[styles.histBtnText, { color: theme.primary }]}>({history.length})</Text>
+            <Text style={[styles.histBtnText, { color: theme.primary }]}>({localDisplay(history.length.toString())})</Text>
           </TouchableOpacity>
         </View>
 
         <Text style={[styles.smallExpr, { color: theme.textSecondary }]} numberOfLines={1}>
-          {showSmallExpr ? displayExpr : (!resultShown ? displayExpr : '')}
+          {localDisplay(showSmallExpr ? displayExpr : (!resultShown ? displayExpr : ''))}
         </Text>
 
-        <Text style={[styles.mainDisplay, { color: theme.text }]} numberOfLines={1} adjustsFontSizeToFit>
+        <Text selectable={true} style={[styles.mainDisplay, { color: theme.text }]} numberOfLines={1} adjustsFontSizeToFit>
           {displayText}
         </Text>
 
         {openBrackets > 0 && (
           <Text style={[styles.bracketHint, { color: theme.accent }]}>
-            {openBrackets} bracket{openBrackets > 1 ? 's' : ''} open
+            {localDisplay(openBrackets.toString())} bracket{openBrackets > 1 ? 's' : ''} open
           </Text>
         )}
       </View>
@@ -396,7 +423,7 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
                       ...(isShiftBtn && shiftOn ? { opacity: 0.85 } : {}),
                     },
                   ]}
-                  onPress={() => press(btn.label)}
+                  onPress={() => handleButtonPress(btn.label)}
                   activeOpacity={0.7}
                 >
                   {btn.sub ? (
@@ -422,11 +449,13 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
         <View style={styles.overlay}>
           <View style={[styles.modal, { backgroundColor: theme.surface }]}>
             <View style={styles.modalHeader}>
-              <Text style={[styles.modalTitle, { color: theme.text }]}>Scientific History</Text>
+              <Text style={[styles.modalTitle, { color: theme.text }]}>
+                {t('scientific', language)} {t('history', language)}
+              </Text>
               <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
                 {history.length > 0 && (
                   <TouchableOpacity onPress={clearHistory}>
-                    <Text style={{ color: theme.accent, fontWeight: '600' }}>Clear</Text>
+                    <Text style={{ color: theme.accent, fontWeight: '600' }}>{t('clearAll', language)}</Text>
                   </TouchableOpacity>
                 )}
                 <TouchableOpacity onPress={() => setShowHistory(false)}>
@@ -438,7 +467,7 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
             {history.length === 0 ? (
               <View style={styles.empty}>
                 <Ionicons name="calculator-outline" size={40} color={theme.textSecondary} />
-                <Text style={{ color: theme.textSecondary, marginTop: 8 }}>No history yet</Text>
+                <Text style={{ color: theme.textSecondary, marginTop: 8 }}>{t('noHistory', language)}</Text>
               </View>
             ) : (
               <ScrollView>
@@ -453,8 +482,8 @@ export const ScientificCalculator: React.FC<Props> = ({ onResult }) => {
                     }}
                   >
                     <View style={{ flex: 1 }}>
-                      <Text style={{ fontSize: 12, color: theme.textSecondary }}>{item.expression}</Text>
-                      <Text style={{ fontSize: 18, fontWeight: 'bold', color: theme.text }}>= {item.result}</Text>
+                      <Text style={{ fontSize: 12, color: theme.textSecondary }}>{localDisplay(item.expression)}</Text>
+                      <Text style={{ fontSize: 18, fontWeight: 'bold', color: theme.text }}>= {localDisplay(item.result)}</Text>
                     </View>
                     <Text style={{ fontSize: 11, color: theme.textSecondary }}>{formatTime(item.timestamp)}</Text>
                   </TouchableOpacity>

@@ -197,7 +197,7 @@ export const BasicCalculator: React.FC<CalculatorProps> = ({ onResult }) => {
         <Text style={[styles.expression, { color: theme.textSecondary }]} numberOfLines={1}>
           {localDisplay(expression)}
         </Text>
-        <Text style={[styles.display, { color: theme.text }]} numberOfLines={1} adjustsFontSizeToFit>
+       <Text selectable={true} style={[styles.display, { color: theme.text }]} numberOfLines={1} adjustsFontSizeToFit>
           {getDisplayText()}
         </Text>
       </View>
